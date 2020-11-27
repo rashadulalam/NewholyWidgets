@@ -43,6 +43,7 @@
     exit;
  }
 
+require_once __DIR__ .'/vendor/autoload.php';
 
 final class NewholyWidgets {
     
@@ -58,9 +59,51 @@ final class NewholyWidgets {
       * Class constructor
       */
       private function __construct() {
+        $this->define_constants();
 
+        register_activation_hook( __FILE__, [$this, 'activate'] );
+
+        add_action( 'plugins_loaded', [$this, 'init_plugin'] );
       }
 
+      /**
+       * Defined the plugin required constant
+       * 
+       * @return void
+       */
+      public function define_constants()
+      {
+        define( 'NH_VERSION', self::version);
+        define( 'NH_FILE', __FILE__);
+        define( 'NH_PATH', __DIR__);
+        define( 'NH_URL', plugins_url( '', NH_FILE ) );
+        define( 'NH_ASSETS', NH_URL . '/assets');
+        
+      }
+
+
+      public function init_plugin()
+      {
+        # code...
+      }
+
+
+      /**
+       * Do stuff upon plugin activation
+       * 
+       * @return void
+       * 
+       */
+      public function activate() {
+        $installed = get_option( 'nh_installed');
+
+        if( ! $instance ) {
+          update_option( 'nh_installed', time() );
+        }
+        
+
+        update_option( 'nh_version', NH_VERSION );
+      }
 
       /**
        * Initializes a singleton instance

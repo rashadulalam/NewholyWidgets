@@ -1,0 +1,20 @@
+{
+    "name": "ras/newholy-widgets",
+    "description": "Plugin for newholy widget",
+    "type": "wordpress-plugin",
+    "license": "GPLv2",
+    "authors": [
+        {
+            "name": "rashadulalam",
+            "email": "rashadul91@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "NH\\Widgets\\": "includes"
+        },
+        "files": []
+    }
+}
